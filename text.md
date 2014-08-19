@@ -1,9 +1,3 @@
-## ミニ勉強会 2014/8/29
-# テストケースの自動生成
-PS第5本部 第2部 成山 孝
-
----
-
 ## TL;DR
 
 e2eの結合テストの外部仕様テストケースを自動生成したよ
@@ -27,7 +21,7 @@ e2eの結合テストの外部仕様テストケースを自動生成したよ
 
 ---
 
-## 成山が考えたこと
+## 考えたこと
 * クライアントはSingle-Page Application で、サーバは JSON を返すだけのアーキテクチャ <!-- .element: class="fragment" -->
 
 * HTMLを返すのに比べてレスポンスの構造が安定しているので、テストが壊れにくい <!-- .element: class="fragment" -->
@@ -146,6 +140,7 @@ _個人の感想であり、商品の効能を保証するものではありま�
   
   assumeThat は assertThat とほぼ同じで、条件にあった場合テストをスキッ
   プするメソッド。
+  
 ---
 
 ## API定義DSL
@@ -237,6 +232,8 @@ ApiSpec_列挙型パラメータ_不正文字列
 
 * エラーコードが統一されている
 
+* それぞれの属性についてエラーコードが返される
+
 ---
 
 ## できていないところ
@@ -246,7 +243,7 @@ ApiSpec_列挙型パラメータ_不正文字列
 
 ### パラメータ間の依存関係
 
-パラメータAがxだったら、パラメータYが必須など。
+パラメータAがxだったら、パラメータXが必須など。
 
 ### GETメソッドしかできていない
 
@@ -261,24 +258,79 @@ GET を想定しているところに POST でリクエストしたり。
 異常系のテストケースは、状態が集約するので検証しやすい。
 
 一方で、正常系はサーバー内で例外が発生しなかったことを確認できるけど、
-分岐網羅や状態網羅までするのは仕様を詳細に記述しないと難しい。
+分岐網羅や状態網羅までするのは仕様を詳細に記述しないと難しい。<!-- .element: class="fragment" -->
 
-詳細な記述になるほど、実際の実装と乖離しやすくなるので、やらなかった。
+<p class="fragment">詳細な記述になるほど、実際の実装と乖離しやすくなるので *** やらなかった *** 。</p>
 
-→他のテストケースで担保
+→その代わり、他のテストケースで担保 <!-- .element: class="fragment" -->
 
-JSON Schema でバリデーションできる便利メソッドを作って呼び出してもらっ
-た。
+JSON Schema でバリデーションできる便利メソッドを作って呼び出してもらった。 <!-- .element: class="fragment" -->
 
 ---
 
-## これから
-APIの定義をDSLで書く。
+## 今回の開発の流れ
 
-↓
+クライアント開発者に配布 ← ドキュメント　テストコード
 
-ドキュメントを生成
+　　　　　　　　　　　　　↓　　　↙
 
-↓
+　　　　　　　　　　　　API仕様DSL
 
-テストケースを生成
+　　　　　　　　　　　　↓
+
+　　　　　　　　　　　　自動テストで確認
+
+---
+
+## これからの開発の流れ
+
+API定義DSLを記述
+
+↓　　　　　　　↓
+
+ドキュメントを生成　　　　テストケースを生成
+
+↓　　　　　　　↓
+
+クライアント開発者に配布　　自動テストで確認
+
+* * *
+
+[RESTful API Modeling Language (RAML)](http://raml.org/index.html)など、
+汎用的なAPI仕様記述言語が出てきているので、これらを活用するほうがいい
+かもしれない。
+
+
+---
+
+<!-- .slide: style="font-size: 70%;" -->
+
+## 参考資料
+
+### REST Assured
+
+テストケースからAPI呼び出しに使っていたライブラリ
+
+rest-assured - Java DSL for easy testing of REST services
+https://code.google.com/p/rest-assured/
+
+### JSON Schema
+
+JSON Schemaの詳細と検証に使っていたライブラリ
+
+JSON Schema and Hyper-Schema
+http://json-schema.org/
+
+fge/json-schema-validator
+https://github.com/fge/json-schema-validator
+
+### RAML
+
+API仕様をYAMLで記述する言語 RAML に関する情報
+
+RESTful API Modeling Language (RAML)
+http://raml.org/index.html
+
+MuleSoftがRESTful APIを設計するRAMLツールをリリース
+http://www.infoq.com/jp/news/2013/10/raml-rest-api-tools
+
