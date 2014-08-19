@@ -1,0 +1,80 @@
+body{
+   background-color: #111;
+}
+
+.reveal {
+   font-family: "Noto Sans", sans-serif;
+   font-weight: 100;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: "Noto Sans", Impact, sans-serif;
+}
+
+.reveal h1 {
+   color: #ffffff;
+   font-weight: 800;
+}
+
+.reveal h2 {
+   color: #ffffff;
+   font-weight: 700;
+}
+
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+   color: #13daec;
+   /* color: #DD4814; */
+   font-weight: 600;
+}
+
+.reveal blockquote {
+   width: 90%;
+}
+
+.reveal pre {
+   width: 90%;
+}
+
+.reveal pre code {
+   font-size: 90%;
+   overflow: visible;
+}
+
+section.landing h1 strong{
+	color: #FF0000;	
+	font-weight: normal;
+}
+
+section.landing h2 {
+   position: absolute;
+   left: 0;
+   top: 0;
+   font-size: large;
+}
+
+section.landing .signature {
+   margin-top: 1em;
+}
+
+section.landing .org {
+   font-size: 80%;
+}
+
+section.landing{
+	background: url(../img/landingBkg.jpg) no-repeat center center; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/landingBkg.jpg', sizingMethod='scale');
+	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../img/landingBkg.jpg', sizingMethod='scale')";
+	pointer-events:all;
+}
