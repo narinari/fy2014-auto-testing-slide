@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>FY2008 mini study: テスト自動化</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -15,6 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.min.css">
+		<!-- <link rel="stylesheet" href="css/theme/solarized.css" id="theme"> -->
 		<link rel="stylesheet" href="css/theme/default.css" id="theme">
 
 		<link rel="stylesheet" href="css/fonts.css">
@@ -54,6 +55,9 @@
                     PS第5本部 第2部 成山 孝
                 </p>
 	</div>
+  <div class="theme-selector">
+    <a href="?theme=default#/">Dark theme</a>|<a href="?theme=solarized#/">Light theme</a>
+  </div>
 </section>
 
 <section data-markdown="./text.md"
@@ -66,6 +70,7 @@
 
 		</div>
 
+
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
 
@@ -75,6 +80,7 @@
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: false,
+                                slideNumber: true,
 				progress: true,
 				history: true,
 				center: true,
