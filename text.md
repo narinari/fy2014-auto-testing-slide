@@ -89,7 +89,7 @@ XSRF
 
 * リグレッションテストが容易になっている <!-- .element: class="fragment" -->
 * 正常性確認テストがやりやすくになっている <!-- .element: class="fragment" -->
-* JUnitで動いてくれるので、機能単体テストの追加や編集が容易 <!-- .element: class="fragment" -->
+* JUnit で動いてくれるので、テストの追加や編集が容易 <!-- .element: class="fragment" -->
 
 ---
 
@@ -116,7 +116,7 @@ XSRF
 > テストは全APIに対して、全てのリクエストパターンを網羅するよう作られています。
 > そのため、正常性確認テストではAPIを意識すること無く、画面レイアウトやアプリケーションの挙動についてのテストに注力できています。
 > モバイルアプリ版もAPIを使います。今までと違ったAPIの使い方をするけど、
-> バグが顕在化する心配が少ないです。
+> 既存バグが顕在化する心配が少ないです。
 
 <div class="notice">個人の感想であり、商品の効能を保証するものではありません</div>
 
@@ -125,7 +125,7 @@ XSRF
 <!-- .slide: data-transition="zoom" -->
 
 ## 成果:現場の声
-### JUnitで動いてくれるので、機能単体テストの追加や編集が容易
+### JUnitで動いてくれるので、テストの追加や編集が容易
 ![dodo image](img/dodo.jpg)
 
 > ローカルでもJenkins上でも複雑な設定なしに動いてくれることも機能単体テストの追加や編集が容易にしている利点の1つです。
@@ -136,12 +136,14 @@ XSRF
 
 ## しくみ
 
+* JUnitを利用
 * 個々のテストケースクラスに、API定義をDSLで記述
 * テストケースのベースクラスに、自動で適用するテストを記述
-* テストの冒頭で assumeThat を使ってAPI定義を見てテストするか判断
+* テストの冒頭で ```assumeThat``` を使ってAPI定義を見てテストするか判断
   
-  assumeThat は assertThat とほぼ同じで、条件にあった場合テストをスキッ
-  プするメソッド。
+  ```Assume#assumeThat``` は ```Assert#assertThat``` とほぼ同じだが、
+  検証を失敗した場合、テストをスキップするメソッド。
+  JUnit 4.4 から追加された機能で、テストの前提を表す。
   
 ---
 
@@ -203,7 +205,7 @@ class ApiTestCase extends TestCase {
 
 ---
 
-## テストの種類
+## 実装したテストの例
 ```
 ApiSpec_認証済み
 ApiSpec_未認証
@@ -335,4 +337,3 @@ http://raml.org/index.html
 
 MuleSoftがRESTful APIを設計するRAMLツールをリリース
 http://www.infoq.com/jp/news/2013/10/raml-rest-api-tools
-
