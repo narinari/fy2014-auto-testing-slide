@@ -162,7 +162,8 @@
 			</div>
 			<div class="elapsed">
 				<h2>Elapsed</h2>
-				<span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span>
+				<span id="hours">00</span><span id="minutes">:00</span><span id="seconds">:00</span><span id="ms">.00</span>
+<button id="elapse-reset">reset</button>
 			</div>
 		</div>
 
@@ -170,7 +171,6 @@
 
 		<script src="../../plugin/markdown/marked.js"></script>
 		<script>
-
 			window.addEventListener( 'load', function() {
 
 				if( window.opener && window.opener.location && window.opener.location.href ) {
@@ -203,33 +203,7 @@
 
 					}, false );
 
-					var start = new Date(),
-						timeEl = document.querySelector( '.time' ),
-						clockEl = document.getElementById( 'clock' ),
-						hoursEl = document.getElementById( 'hours' ),
-						minutesEl = document.getElementById( 'minutes' ),
-						secondsEl = document.getElementById( 'seconds' );
-
-					setInterval( function() {
-
-						timeEl.style.opacity = 1;
-
-						var diff, hours, minutes, seconds,
-							now = new Date();
-
-						diff = now.getTime() - start.getTime();
-						hours = Math.floor( diff / ( 1000 * 60 * 60 ) );
-						minutes = Math.floor( ( diff / ( 1000 * 60 ) ) % 60 );
-						seconds = Math.floor( ( diff / 1000 ) % 60 );
-
-						clockEl.innerHTML = now.toLocaleTimeString();
-						hoursEl.innerHTML = zeroPadInteger( hours );
-						hoursEl.className = hours > 0 ? "" : "mute";
-						minutesEl.innerHTML = ":" + zeroPadInteger( minutes );
-						minutesEl.className = minutes > 0 ? "" : "mute";
-						secondsEl.innerHTML = ":" + zeroPadInteger( seconds );
-
-					}, 1000 );
+                                        setTimer();
 
 					// Broadcasts the state of the notes window to synchronize
 					// the main window
@@ -261,7 +235,47 @@
 				var str = "00" + parseInt( num );
 				return str.substring( str.length - 2 );
 			}
+                        
+                        var timerID = null;
 
+                        function setTimer() {
+					var start = new Date(),
+						timeEl = document.querySelector( '.time' ),
+						clockEl = document.getElementById( 'clock' ),
+						hoursEl = document.getElementById( 'hours' ),
+						minutesEl = document.getElementById( 'minutes' ),
+						secondsEl = document.getElementById( 'seconds' );
+						msEl = document.getElementById( 'ms' );
+
+                                        if (timerID != null) {
+                                          clearInterval(timerID);
+                                        }
+
+					timerID = setInterval( function() {
+
+						timeEl.style.opacity = 1;
+
+						var diff, hours, minutes, seconds,
+							now = new Date();
+
+						diff = now.getTime() - start.getTime();
+						hours = Math.floor( diff / ( 1000 * 60 * 60 ) );
+						minutes = Math.floor( ( diff / ( 1000 * 60 ) ) % 60 );
+						seconds = Math.floor( ( diff / 1000 ) % 60 );
+						ms = Math.floor( diff % 1000 / 100);
+
+						clockEl.innerHTML = now.toLocaleTimeString();
+						hoursEl.innerHTML = zeroPadInteger( hours );
+						hoursEl.className = hours > 0 ? "" : "mute";
+						minutesEl.innerHTML = ":" + zeroPadInteger( minutes );
+						minutesEl.className = minutes > 0 ? "" : "mute";
+						secondsEl.innerHTML = ":" + zeroPadInteger( seconds );
+						msEl.innerHTML = "." + ms;
+
+					}, 100 );
+                        }
+
+                        document.getElementById('elapse-reset').addEventListener('click', setTimer);
 		</script>
 	</body>
 </html>
