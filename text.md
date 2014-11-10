@@ -30,7 +30,7 @@ e2eの結合テストの外部仕様テストケースを自動生成したよ
   自動的に生成できる！
   <!-- .element: class="fragment" -->
 
-* いまどきは、サーバをSOA的に使えるようにAPIボックスにするようなアーキテクチャになってきたから、応用範囲が広いかも！ <!-- .element: class="fragment" -->
+* いまどきは、システムをSOA的に使えるようにAPIボックスにするようなアーキテクチャになってきたから、応用範囲が広いかも！ <!-- .element: class="fragment" -->
 
 ---
 
@@ -101,8 +101,10 @@ XSRF
   
   ```Assume#assumeThat``` は ```Assert#assertThat``` とほぼ同じだが、
   検証を失敗した場合、テストをスキップするメソッド。
-  JUnit 4.4 から追加された機能で、テストの前提を表す。
-  
+  JUnit 4.4 から追加された機能で、テストの前提を表す。（論理包含に相当する）
+
+![class diagram](img/class.png)
+
 ---
 
 ## API定義DSL
@@ -111,7 +113,7 @@ ApiSpecのサブクラスを作り、```{{...}}``` 内のコードがインス�
 
 ```java
 class AnyApiTest extends ApiTestCase {
-  public getApiPath() {
+  public getApiSpec() {
     return new ApiSpec("/api/any") {{
         // API利用時のメソッド定義(デフォルトは「GET」)
         usageMethod("GET");
@@ -154,7 +156,7 @@ class ApiTestCase extends TestCase {
     // エラーコード検証
     JsonPath json = parse(actual);
     for (ParameterSpec<?> paramSpec : apiSpec.getRequireParams()) {
-      assertErrorCode(json, paramSpec.getName(), "010");
+      assertErrorCode(json, paramSpec.getName(), ERROR_REQUIRED_PARAM);
     }
   }
 }
@@ -294,15 +296,15 @@ JSON Schema でバリデーションできる便利メソッドを作って呼�
 
 ## これからの開発の流れ
 
-API定義DSLを記述
+API定義DSLを記述　→　スケルトン生成 → 実装
 
-↓　　　　　　　↓
+↙　　　　　↓　　　　　　　　　　　　　
 
-ドキュメントを生成　　　　テストケースを生成
+ドキュメントを生成　　テストケースを生成　　　　　　　　　　　　　　
 
-↓　　　　　　　↓
+↓　　　　　↓　　　　　　　　　　　　　
 
-クライアント開発者に配布　　自動テストで確認
+クライアント開発者に配布　自動テストで確認　　　　　　　　　　　　　　　
 
 * * *
 
