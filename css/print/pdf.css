@@ -132,7 +132,7 @@ ul, ol, div, p {
 	left: 0 !important;
 	top: 0 !important;
 	margin: 0 !important;
-	padding: 2cm 2cm 0 2cm !important;
+	padding: 2cm 1cm 0 1cm !important;
 	box-sizing: border-box !important;
 
 	opacity: 1 !important;
@@ -187,4 +187,31 @@ ul, ol, div, p {
 }
 .reveal small a {
 	font-size: 16pt !important;
+}
+
+   section.landing h2 {
+      top: -12px;
+   }
+
+   div.theme-selector{
+      display: none;
+   }
+
+   div.notice {
+      position: static;
+      -webkit-writing-mode: horizontal-tb;
+   }
+
+.reveal blockquote {
+   width: 90%;
+}
+
+.reveal pre {
+   width: 90%;
+}
+
+.reveal pre code {
+   font-size: 80%;
+   overflow: visible;
+   line-height: 20px;
 }

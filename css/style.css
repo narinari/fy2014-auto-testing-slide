@@ -100,7 +100,7 @@ div.notice {
    -webkit-writing-mode: vertical-rl;
 }
 
-@media print {
+@media print.pdf {
    div.theme-selector{
       display: none;
    }
